@@ -54,7 +54,6 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     final controller = Get.find<ProductController>();
 
-
     return Container(
       margin: const EdgeInsets.only(right: 20, bottom: 20),
       padding: const EdgeInsets.all(12),

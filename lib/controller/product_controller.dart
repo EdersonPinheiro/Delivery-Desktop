@@ -6,7 +6,7 @@ import '../model/product.dart';
 class ProductController {
   RxList<Product> productList = <Product>[].obs;
   RxDouble totalPrice = 0.0.obs;
-  
+
   void addProduct(Product product) {
     productList.add(product);
     totalPrice.value += product.price;
@@ -29,17 +29,16 @@ class ProductController {
     };
 
     try {
-    final response = await dio
-        .post('https://parseapi.back4app.com/parse/functions/get-all-products');
+      final response = await dio.post(
+          'https://parseapi.back4app.com/parse/functions/get-all-products');
 
-    if (response.data["result"] != null) {
-      products = (response.data["result"] as List)
-          .map((data) => Product.fromJson(data))
-          .toList();
-      //return products;
-    }
-
-    }catch (e) {
+      if (response.data["result"] != null) {
+        products = (response.data["result"] as List)
+            .map((data) => Product.fromJson(data))
+            .toList();
+        //return products;
+      }
+    } catch (e) {
       print(e);
     }
 
