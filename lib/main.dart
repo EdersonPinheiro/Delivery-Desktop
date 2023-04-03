@@ -1,7 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_pos_app/home.dart';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:delivery_desktop/home.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
+import 'view/orders_page.dart';
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const KeyApplicationId = 'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae';
+  const KeyClientKey = 'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M';
+  const KeyParseServerUrl = 'https://parseapi.back4app.com';
+
+  await Parse().initialize(
+    KeyApplicationId,
+    KeyParseServerUrl,
+    clientKey: keyClassUser,
+    liveQueryUrl: 'wss://deliveryappevo.b4a.io',
+    debug: true,
+  );
   runApp(const MyApp());
 }
 
@@ -38,7 +55,7 @@ class _MainPageState extends State<MainPage> {
       case 'Menu':
         return Container();
       case 'Pedidos':
-        return Container();
+        return OrdersPage();
       case 'Promoções':
         return Container();
       case 'Configurações':

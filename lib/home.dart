@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pos_app/controller/product_controller.dart';
-import 'package:flutter_pos_app/view/order_page.dart';
-import 'package:flutter_pos_app/view/product_page.dart';
+import 'package:delivery_desktop/controller/product_controller.dart';
+import 'package:delivery_desktop/view/product_page.dart';
+import 'package:get/get.dart';
 
 import 'model/product.dart';
+import 'view/cart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.put(ProductController());
     _getProducts();
   }
 
@@ -37,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   void ue() {
     // Recarregue a lista de produtos aqui
     setState(() {
-      controller.productOrder = []; // Limpe a lista de produtos atual
       _getProductsOrder(); // Carregue a lista de produtos novamente
     });
   }
@@ -99,114 +100,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Expanded(flex: 1, child: Container()),
-        Expanded(
-          flex: 5,
-          child: Column(
-            children: [
-              _topMenu(
-                title: 'Pedidos',
-                subTitle: 'Mesa 8',
-                action: Container(),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: Container(),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: const Color(0xff1f2029),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Sub Total',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            '\$40.32',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Tax',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            '\$4.32',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20),
-                        height: 2,
-                        width: double.infinity,
-                        color: Colors.white,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'Total',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            '\$44.64',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          onPrimary: Colors.white,
-                          primary: Colors.deepOrange,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.shopping_cart_rounded, size: 16),
-                            SizedBox(width: 6),
-                            Text('Finalizar Compra')
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        CartPage()
       ],
     );
   }
@@ -297,55 +191,64 @@ class _HomePageState extends State<HomePage> {
       required Product product,
       required Visibility button,
       required Visibility row}) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       margin: const EdgeInsets.only(right: 20, bottom: 20),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        color: const Color(0xff1f2029),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 130,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(image),
-                fit: BoxFit.cover,
-              ),
-            ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 400,
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: const Color(0xff1f2029),
           ),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                price,
-                style: const TextStyle(
-                  color: Colors.deepOrange,
-                  fontSize: 20,
+              Container(
+                height: screenWidth < 600 ? 100 : 130,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: NetworkImage(image),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: Colors.deepOrange,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 60),
+              isVisible
+                  ? Center(child: button)
+                  : Center(
+                      child: row,
+                    )
             ],
           ),
-          const SizedBox(height: 60),
-          isVisible
-              ? Center(child: button)
-              : Center(
-                  child: row,
-                )
-        ],
+        ),
       ),
     );
   }
