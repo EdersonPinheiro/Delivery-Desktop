@@ -395,8 +395,8 @@ class _OrdersPageState extends State<OrdersPage> {
   Future<List<Order>> getOrders() async {
     var dio = Dio();
     dio.options.headers = {
-      'X-Parse-Application-Id': 'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae',
-      'X-Parse-REST-API-Key': 'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M',
+      'X-Parse-Application-Id': '',
+      'X-Parse-REST-API-Key': '',
       'X-Parse-Session-Token': '${token}',
     };
 
@@ -414,8 +414,8 @@ class _OrdersPageState extends State<OrdersPage> {
   Future<List<Order>> getOrdersProducao() async {
     var dio = Dio();
     dio.options.headers = {
-      'X-Parse-Application-Id': 'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae',
-      'X-Parse-REST-API-Key': 'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M',
+      'X-Parse-Application-Id': '',
+      'X-Parse-REST-API-Key': '',
       'X-Parse-Session-Token': '${token}',
     };
 
@@ -433,8 +433,8 @@ class _OrdersPageState extends State<OrdersPage> {
   Future<List<Order>> getOrdersPronto() async {
     var dio = Dio();
     dio.options.headers = {
-      'X-Parse-Application-Id': 'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae',
-      'X-Parse-REST-API-Key': 'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M',
+      'X-Parse-Application-Id': '',
+      'X-Parse-REST-API-Key': '',
       'X-Parse-Session-Token': '${token}',
     };
 
@@ -456,9 +456,9 @@ class _OrdersPageState extends State<OrdersPage> {
           options: Options(
             headers: {
               'X-Parse-Application-Id':
-                  'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae',
+                  '',
               'X-Parse-REST-API-Key':
-                  'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M',
+                  '',
               'X-Parse-Session-Token': '${token}',
               'Content-Type': 'application/json;charset=UTF-8',
             },
@@ -476,9 +476,9 @@ class _OrdersPageState extends State<OrdersPage> {
           options: Options(
             headers: {
               'X-Parse-Application-Id':
-                  'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae',
+                  '',
               'X-Parse-REST-API-Key':
-                  'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M',
+                  '',
               'X-Parse-Session-Token': '${token}',
               'Content-Type': 'application/json;charset=UTF-8',
             },
