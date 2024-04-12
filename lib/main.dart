@@ -8,8 +8,8 @@ import 'view/orders_page.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  const KeyApplicationId = 'nPkNxrgspNFHnN9jgDnsUDljfeAtEtzN9a5EM0Ae';
-  const KeyClientKey = 'tA4JuWVyFApBOQQgdJujXbNUNsk5znqpYIfaxc6M';
+  const KeyApplicationId = '';
+  const KeyClientKey = '';
   const KeyParseServerUrl = 'https://parseapi.back4app.com';
 
   await Parse().initialize(
